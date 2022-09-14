@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /_app/
+Disallow: /admin/
+Disallow: /cache/

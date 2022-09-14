@@ -1,0 +1,86 @@
+body{background: #fcfcfc; padding: 0 15px; margin: 0; color: #333; font-size: 0.875em; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
+html{font-size: 1em; font-family: 'Open Sans', serif; line-height: 1.2;}
+pre{font-size: 1em !important; padding: 10px; background: #FBF0F0; font-family: 'Source Code Pro', serif;}
+img{max-width: 100% !important;}
+
+.btn{
+    display: block;
+    cursor: pointer;
+    padding: 7px 12px;
+    margin-top: 2px;
+    background: #888;
+    font-size: 0.9em;
+    color: #fff;
+    text-decoration: none !important;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-shadow: 1px 1px #555;
+}
+
+.btn_cta_blue{
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #0E96E5;
+    border-bottom: 5px solid #096397;
+}
+
+.btn_cta_blue:hover{
+    background-color: #096397;
+    border-color: #0A537D;
+}
+
+.btn_cta_green{
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #00B494;
+    border-bottom: 5px solid #008068;
+}
+
+.btn_cta_green:hover{
+    background-color: #008068;
+    border-color: #0B5747;
+}
+
+.btn_cta_yellow{
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #FAAD50;
+    border-bottom: 5px solid #CC8D41;
+}
+
+.btn_cta_yellow:hover{
+    background-color: #CC8D41;
+    border-color: #A67436;
+}
+
+.btn_cta_red{
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #F45563;
+    border-bottom: 5px solid #C54550;
+}
+
+.btn_cta_red:hover{
+    background-color: #C54550;
+    border-color: #93343C;
+}
+
+form{padding: 30px; text-align: center; background: #eee; margin: 20px 0; text-align: center; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
+form label{display: block; width: 100%; margin-bottom: 15px; font-size: 0.9em; text-transform: uppercase;}
+form input,
+form textarea{border: 1px solid #ccc; display: block; width: calc(100% - 30px); max-width: 100%; margin-top: 15px; font-size: 1em; padding: 10px 15px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
+form button,
+form input[type="submit"]{display: block; width: 100%; border: 0; color: #fff; text-shadow: 0 1px #000; cursor: pointer; padding: 15px; font-size: 1.2em; font-weight: bold; text-transform: uppercase; background: #00B494; border-bottom: 5px solid #008068; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
+form button:hover,
+form input[type="submit"]:hover{background-color: #008068; border-color: #0B5747;}
