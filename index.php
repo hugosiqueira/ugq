@@ -55,7 +55,7 @@ else:
     ?><!DOCTYPE html>
     <html lang="pt-br" itemscope itemtype="https://schema.org/<?= $SEO->getSchema(); ?>">
         <head>
-            <meta charset="UTF-8">
+            <meta charset="UTF-8">
         <meta name="mit" content="2017-12-04T19:31:24-02:00+9549">
             <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=0">
 

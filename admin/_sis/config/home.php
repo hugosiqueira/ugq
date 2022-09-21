@@ -109,6 +109,9 @@ endif;
         $UpdateNull = ['conf_type' => 'ADMIN'];
         $Update->ExeUpdate(DB_CONF, $UpdateNull, "WHERE conf_type = :null", "null=");
 
+        $UpdateE = ['conf_type' => 'ECOMMERCE'];
+        $Update->ExeUpdate(DB_CONF, $UpdateE, "WHERE conf_type = :e", "e=E");
+
         $UpdateAD = ['conf_type' => 'SITE_ADDR'];
         $Update->ExeUpdate(DB_CONF, $UpdateAD, "WHERE conf_key LIKE '%SITE_ADDR%'", "");
 

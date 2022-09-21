@@ -1,3 +1,8 @@
+/* 
+ * Biblioteca de eventos jQuery do Painel Work Control Pro Content Manager
+ * Created on : 06/01/2016, 11:15:16
+ * Author     : UpInside Treinamentos
+ */
 
 $(function () {
     //MOBILE MENU CONTROL
@@ -1203,6 +1208,15 @@ $(function () {
         }, 'json');
     }, 5 * 60 * 1000);
 
+    //WC LICENSE
+    $('.wc_domain_license').click(function () {
+        $("body").append("<div class='wc_domain_license_box'><div class='wc_domain_license_box_content'><span class='icon-warning icon-notext font_yellow'></span><p><b>SOFTWARE NÃO LICENCIADO!</b></p><p>Você está utilizando uma versão não licenciada do Work Control® estando sujeito a multa e processos legais por cópia não licenciada.</p><p>Utilizar este software sem licença é crime!<br>Lei Nº 9.610, de 19 de fevereiro de 1998 de direitos autorais.</p><p style='font-size: 0.7rem; color: #ccc'>Work Control® - Todos os Direitos Reservados para UpInside Treinamentos.<br>CNPJ: 10.548.698/0001-38 / cursos@upinside.com.br</p></div></div>");
+        $('.wc_domain_license_box').click(function () {
+            $(this).fadeOut(200, function () {
+                $(this).remove();
+            });
+        });
+    });
 
     //WC FILTERS
     $('.jwc_filters').click(function () {

@@ -1,0 +1,83 @@
+.wc_imobi_filter{
+    background: #eee;
+}
+
+.wc_imobi_filter .content{
+    padding: 20px 0;
+}
+
+.wc_imobi_filter h1{
+    font-size: 1.4em;
+    font-weight: 300;
+    color: #008068;
+    padding-left: 5px;
+    padding-bottom: 10px;
+}
+
+.wc_imobi_filter select{
+    display: inline-block;
+    width: 25%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 5px solid #eee;
+    margin-bottom: 5px;
+    outline: none;
+    background-image: url(_cdn/widgets/imobi/images/wc_arrow.png);
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+    background-size: 20px;
+    cursor: pointer;
+}
+
+.wc_imobi_filter .btn{
+    float: right;
+    width: 25%;
+    border: 5px solid #eee;
+    padding: 8px;
+    margin-top: 0;
+}
+
+.wc_mobile_filter{
+    display: block;
+    width: 100%;
+    background: #eee;
+    padding: 20px;
+    color: #008068;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+}
+
+.wc_mobile_filter span{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.wc_mobile_filter .bar{
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+@media (max-width: 64em){
+    .wc_imobi_filter select,
+    .wc_imobi_filter .btn{
+        width: 50%;
+    }
+}
+
+@media (max-width: 32em){
+    .wc_imobi_filter .content{
+        display: none;
+    }
+
+    .wc_mobile_filter{
+        display: block;
+    }
+
+    .wc_imobi_filter select,
+    .wc_imobi_filter .btn{
+        width: 100%;
+    }
+}

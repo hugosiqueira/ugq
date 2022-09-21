@@ -153,7 +153,73 @@ class Seo {
             else:
                 $this->set404();
             endif;
-       
+        elseif ($this->File == 'produto'):
+            //PRODUTO 
+            $Read->FullRead("SELECT pdt_title, pdt_subtitle, pdt_cover FROM " . DB_PDT . " WHERE pdt_name = :nm", "nm={$this->Link}");
+            if ($Read->getResult()):
+                $Pdt = $Read->getResult()[0];
+                $this->Schema = 'Product';
+                $this->Title = $Pdt['pdt_title'] . " - " . SITE_NAME;
+                $this->Description = $Pdt['pdt_subtitle'];
+                $this->Image = BASE . "/uploads/{$Pdt['pdt_cover']}";
+            else:
+                $this->set404();
+            endif;
+        elseif ($this->File == 'produtos'):
+            //PRODUTOS
+            $Read->FullRead("SELECT cat_title FROM " . DB_PDT_CATS . " WHERE cat_name = :nm", "nm={$this->Link}");
+            if ($Read->getResult()):
+                $Category = $Read->getResult()[0];
+                $this->Schema = 'WebSite';
+                $this->Title = $Category['cat_title'] . " - " . SITE_NAME;
+                $this->Description = SITE_DESC;
+                $this->Image = INCLUDE_PATH . '/images/default.jpg';
+            else:
+                $this->set404();
+            endif;
+        elseif ($this->File == 'marca'):
+            //MARCAS
+            $Read->FullRead("SELECT brand_title FROM " . DB_PDT_BRANDS . " WHERE brand_name = :nm", "nm={$this->Link}");
+            if ($Read->getResult()):
+                $Brand = $Read->getResult()[0];
+                $this->Schema = 'WebSite';
+                $this->Title = $Brand['brand_title'] . " - " . SITE_NAME;
+                $this->Description = SITE_DESC;
+                $this->Image = INCLUDE_PATH . '/images/default.jpg';
+            else:
+                $this->set404();
+            endif;
+        elseif ($this->File == 'pedido'):
+            //PEDIDO
+            $this->Schema = 'WebSite';
+            $this->Title = SITE_NAME . " - " . ECOMMERCE_TAG;
+            $this->Description = SITE_DESC;
+            $this->Image = INCLUDE_PATH . '/images/default.jpg';
+        elseif ($this->File == 'imovel'):
+            //IMOVEL
+            $Read->ExeRead(DB_IMOBI, "WHERE realty_name = :nm", "nm={$this->Link}");
+            if ($Read->getResult()):
+                $Imobi = $Read->getResult()[0];
+                $this->Schema = 'WebSite';
+                $this->Title = "{$Imobi['realty_title']} - " . SITE_NAME;
+                $this->Description = Check::Chars($Imobi['realty_desc'], 156);
+                $this->Image = BASE . "/uploads/{$Imobi['realty_cover']}";
+            else:
+                $this->set404();
+            endif;
+        elseif ($this->File == 'imoveis'):
+            //IMÓVEIS
+            $Link = (!empty($this->Link) && $this->Link != 'indiferente' ? ucwords($this->Link) . " " : '');
+            $this->Schema = 'WebSite';
+            $this->Title = $Link . "Imóveis - " . SITE_NAME;
+            $this->Description = SITE_DESC;
+            $this->Image = INCLUDE_PATH . '/images/default.jpg';
+        elseif ($this->File == 'filtro'):
+            //FILTRO
+            $this->Schema = 'WebSite';
+            $this->Title = "Filtrar Imóveis - " . SITE_NAME;
+            $this->Description = SITE_DESC;
+            $this->Image = INCLUDE_PATH . '/images/default.jpg';
         elseif ($this->File == 'campus'):
             switch ($this->Link):
                 case '':

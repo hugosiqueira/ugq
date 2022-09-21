@@ -73,7 +73,7 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
                             endif;
                         endif;
 
-                        $Upload->Image($UserThumb, $UserId . "-" . Check::Name($PostData['user_name'] . $PostData['user_lastname']) . '-' . time(), 600);
+                        $Upload->Image($UserThumb, $UserId . "-" . Check::Name($PostData['user_name']) . '-' . time(), 600);
                         if ($Upload->getResult()):
                             $PostData['user_thumb'] = $Upload->getResult();
                         else:
@@ -105,12 +105,12 @@ if ($PostData && $PostData['callback_action'] && $PostData['callback'] == $CallB
                         unset($PostData['user_level']);
                     elseif ($PostData['user_level'] > $_SESSION['userLogin']['user_level']):
                         $PostData['user_level'] = $_SESSION['userLogin']['user_level'];
-                        $jSON['trigger'] = AjaxErro("<b class='icon-checkmark'>TUDO CERTO:</b> Olá {$_SESSION['userLogin']['user_name']}. O usuário {$PostData['user_name']} {$PostData['user_lastname']} foi atualizado com sucesso!<p class='icon-warning'>Você não pode criar usuários com nível de acesso maior que o seu. Então o nível gravado foi " . getWcLevel($PostData['user_level']) . "!</p>");
+                        $jSON['trigger'] = AjaxErro("<b class='icon-checkmark'>TUDO CERTO:</b> Olá {$_SESSION['userLogin']['user_name']}. O usuário {$PostData['user_name']} foi atualizado com sucesso!<p class='icon-warning'>Você não pode criar usuários com nível de acesso maior que o seu. Então o nível gravado foi " . getWcLevel($PostData['user_level']) . "!</p>");
                     else:
-                        $jSON['trigger'] = AjaxErro("<b class='icon-checkmark'>TUDO CERTO:</b> Olá {$_SESSION['userLogin']['user_name']}. O usuário {$PostData['user_name']} {$PostData['user_lastname']} foi atualizado com sucesso!");
+                        $jSON['trigger'] = AjaxErro("<b class='icon-checkmark'>TUDO CERTO:</b> Olá {$_SESSION['userLogin']['user_name']}. O usuário {$PostData['user_name']} foi atualizado com sucesso!");
                     endif;
 
-                    $PostData['user_datebirth'] = (!empty($PostData['user_datebirth']) ? Check::Nascimento($PostData['user_datebirth']) : null);
+                    $PostData['user_datebirth'] = (!empty($PostData['user_datebirth']) ? $PostData['user_datebirth'] : null);
 
                     //ATUALIZA USUÁRIO
                     $Update->ExeUpdate(DB_USERS, $PostData, "WHERE user_id = :id", "id={$UserId}");

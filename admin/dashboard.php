@@ -33,6 +33,10 @@ endif;
 $getViewInput = filter_input(INPUT_GET, 'wc', FILTER_DEFAULT);
 $getView = ($getViewInput == 'home' ? 'home' . ADMIN_MODE : $getViewInput);
 
+//PARA SUA SEGURANÇA, NÃO REMOVA ESSA VALIDAÇÃO!
+if (!file_exists("dashboard.json")):
+    echo "<span class='wc_domain_license icon-key icon-notext wc_tooltip radius'></span>";
+endif;
 
 //SITEMAP GENERATE (1X DAY)
 $SiteMapCheck = fopen('sitemap.txt', "a+");
@@ -185,7 +189,8 @@ endif;
                         <?php
                     endif;
 
-                   
+
+
 
                     //SISWC verifica personalizações!
                     if (ADMIN_WC_CUSTOM && file_exists(__DIR__ . "/_siswc/wc_menu.php")):
@@ -221,7 +226,7 @@ endif;
 
                     if (APP_USERS && $_SESSION['userLogin']['user_level'] >= LEVEL_WC_USERS):
                         ?>
-                        <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'users/') ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-users" title="Usuários" href="dashboard.php?wc=users/home">Usuários</a>
+                        <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'users/') ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-users" title="Colaboradores" href="dashboard.php?wc=users/home">Colaboradores</a>
                             <ul class="dashboard_nav_menu_sub">
                                 <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'users/home' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Ver Usuários" href="dashboard.php?wc=users/home">&raquo; Ver Usuários</a></li>
                                 <li class="dashboard_nav_menu_sub_li <?= strstr($getViewInput, 'users/home&opt=customers') ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Clientes" href="dashboard.php?wc=users/home&opt=customers">&raquo; Clientes</a></li>
@@ -252,12 +257,16 @@ endif;
                         <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'config/') ? 'dashboard_nav_menu_active' : ''; ?>"><a style="cursor: default;" onclick="return false;" class="icon-cogs" title="Configurações" href="#">Configurações</a>
                             <ul class="dashboard_nav_menu_sub top">
                                 <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_MASTER): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/home' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Configurações Gerais" href="dashboard.php?wc=config/home">&raquo; Configurações Gerais</a></li><?php endif; ?>
+                                <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_MASTER): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/license' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Licenciar Domínio" href="dashboard.php?wc=config/license">&raquo; Licenciar Domínio</a></li><?php endif; ?>
                                 <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_CODES): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/codes' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Gerenciar Pixels" href="dashboard.php?wc=config/codes">&raquo; Gerenciar Pixels</a></li><?php endif; ?>
+                                <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_API): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/wcapi' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="WorkControl API" href="dashboard.php?wc=config/wcapi">&raquo; Work Control® API</a></li><?php endif; ?>
+                                <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_MASTER): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/sample' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="WorkControl Samples" href="dashboard.php?wc=config/samples">&raquo; Work Control® Samples</a></li><?php endif; ?>
                             </ul>
                         </li>
                         <?php
                     endif;
                     ?>
+					<li class="dashboard_nav_menu_li"><a target="_blank" class="icon-calendar" title="Ver Site" href="dashboard.php?wc=pendencias/home">Pendências</a></li>
                     <!--
                     <li class="dashboard_nav_menu_li"><a class="icon-lifebuoy" title="Suporte" href="dashboard.php?wc=home">Suporte</a></li>
                     -->
@@ -281,7 +290,11 @@ endif;
                     endif;
                 endif;
 
-
+                if (!file_exists("../license.txt")):
+                    echo "<div>";
+                    echo Erro("<span class='al_center'><b class='icon-warning'>ATENÇÃO:</b> O license.txt não está presente na raiz do projeto. Utilizar o Work Control® sem esse arquivo caracteriza cópia não licenciada.", E_USER_ERROR);
+                    echo "</div>";
+                endif;
 
                 if (ADMIN_MAINTENANCE):
                     echo "<div>";
@@ -295,7 +308,7 @@ endif;
                     $MysqlVersion = $Read->getResult()[0]['mysql_version'];
                     if (!stripos($MysqlVersion, "MariaDB")):
                         echo "<div>";
-                        echo Erro('<span class="al_center"><b class="icon-warning">ATENÇÃO:</b> O sistema foi projetado com <b>banco de dados MariaDB superior a 10.1</b>, você está usando ' . $MysqlVersion . '!</span>', E_USER_ERROR);
+                        echo Erro('<span class="al_center"><b class="icon-warning">ATENÇÃO:</b> O Work Control® foi projetado com <b>banco de dados MariaDB superior a 10.1</b>, você está usando ' . $MysqlVersion . '!</span>', E_USER_ERROR);
                         echo "</div>";
                     endif;
                 endif;
@@ -304,7 +317,7 @@ endif;
                 $PHPVersion = phpversion();
                 if ($PHPVersion < '5.6'):
                     echo "<div>";
-                    echo Erro('<span class="al_center"><b class="icon-warning">ATENÇÃO:</b> O sistema foi projetado com <b>PHP 5.6 ou superior</b>, a versão do seu PHP é ' . $PHPVersion . '!</span>', E_USER_ERROR);
+                    echo Erro('<span class="al_center"><b class="icon-warning">ATENÇÃO:</b> O Work Control® foi projetado com <b>PHP 5.6 ou superior</b>, a versão do seu PHP é ' . $PHPVersion . '!</span>', E_USER_ERROR);
                     echo "</div>";
                 endif;
                 ?>

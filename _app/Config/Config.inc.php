@@ -72,6 +72,7 @@ if (!$WorkControlDefineConf):
     define('APP_COMMENTS', 0); //Comentários
     define('APP_SLIDE', 0); //Slide Em Destaque
     define('APP_USERS', 1); //Usuários
+	define('APP_PENDENCY',1); // Pendências
 
     /*
      * LEVEL CONFIG
@@ -81,14 +82,19 @@ if (!$WorkControlDefineConf):
     define('LEVEL_WC_COMMENTS', 6);
     define('LEVEL_WC_PAGES', 6);
     define('LEVEL_WC_SLIDES', 6);
+    define('LEVEL_WC_IMOBI', 6);
+    define('LEVEL_WC_PRODUCTS', 6);
+    define('LEVEL_WC_PRODUCTS_ORDERS', 6);
     define('LEVEL_WC_EAD_COURSES', 6);
     define('LEVEL_WC_EAD_STUDENTS', 6);
     define('LEVEL_WC_EAD_SUPPORT', 6);
+    define('LEVEL_WC_EAD_ORDERS', 6);
     define('LEVEL_WC_REPORTS', 6);
     define('LEVEL_WC_USERS', 6);
     define('LEVEL_WC_CONFIG_MASTER', 10);
     define('LEVEL_WC_CONFIG_API', 10);
     define('LEVEL_WC_CONFIG_CODES', 10);
+	define('LEVEL_UGQ_PENDENCY', 10);
 
     /*
      * FB SEGMENT
@@ -99,6 +105,8 @@ if (!$WorkControlDefineConf):
     define('SEGMENT_FB_PIXEL_ID', 0); //Id do pixel de rastreamento
     define('SEGMENT_WC_USER', 0); //Enviar dados do login de usuário?
     define('SEGMENT_WC_BLOG', 0); //Ultra segmentar páginas do BLOG?
+    define('SEGMENT_WC_ECOMMERCE', 0); //Ultra segmentar páginas do E-COMMERCE?
+    define('SEGMENT_WC_IMOBI', 0); //Ultra segmentar páginas do imobi?
     define('SEGMENT_WC_EAD', 0); //Ultra segmentar páginas do EAD?
     define('SEGMENT_GL_ANALYTICS_UA', ''); //ID do Google Analytics (UA-00000000-0)
     define('SEGMENT_FB_PAGE_ID', ''); //ID do Facebook Pages (Obrigatório para POST - Instant Article)
@@ -112,6 +120,8 @@ if (!$WorkControlDefineConf):
      */
     define('APP_LINK_POSTS', 1); //Posts
     define('APP_LINK_PAGES', 1); //Páginas
+    define('APP_LINK_PRODUCTS', 1); //Produtos
+    define('APP_LINK_PROPERTIES', 1); //Imóveis
 
     /*
      * ACCOUNT CONFIG
@@ -125,12 +135,12 @@ if (!$WorkControlDefineConf):
     define('COMMENT_MODERATE', 1); //Todos os NOVOS comentários ficam ocultos até serem aprovados
     define('COMMENT_ON_POSTS', 1); //Aplica comentários aos posts
     define('COMMENT_ON_PAGES', 1); //Aplica comentários as páginas
+    define('COMMENT_ON_PRODUCTS', 1); //Aplica comentários aos produtos
     define('COMMENT_SEND_EMAIL', 1); //Envia e-mails transicionais para usuários sobre comentários
     define('COMMENT_ORDER', 'DESC'); //Ordem de exibição dos comentários (ASC ou DESC)
     define('COMMENT_RESPONSE_ORDER', 'ASC'); //Ordem de exibição das respostas (ASC ou DESC)
 
-    
-
+   
     /*
      * CONFIGURAÇÕES DO EAD
      */

@@ -72,6 +72,7 @@
                 </ul>
             </div>
             <div class="copy">
+                Orgulhosamente desenvolvido com Work Control!<br>
                 Copyright © <?= date('Y'); ?> <?= SITE_NAME; ?> - Todos os direitos reservados.
             </div>
             <div class="clear"></div>

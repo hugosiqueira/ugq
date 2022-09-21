@@ -1,0 +1,641 @@
+.content{
+    width: 80%;
+    padding: 40px 0;
+}
+
+.wc_slides{
+    width: 100%;
+}
+
+.wc_slide_item_desc{
+    top: 40% !important;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.main_header{
+    border-top: 5px solid #008B6F;
+    background: #fbfbfb;
+}
+
+.main_header .content{
+    padding: 25px 0 15px 0;
+}
+
+.wc_mobile_nav{
+    display: none;
+    width: 100%;
+    padding: 20px;
+    background: #333;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+.wc_mobile_nav span{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.wc_mobile_nav .bar{
+    margin-right: 5px;
+    margin-top: -1px;
+}
+
+.wc_mobile_nav:hover{
+    color: #008B6F;
+}
+
+.site_title{
+    position: absolute;
+    text-indent: -9999px;
+}
+
+.main_header .wc_logo{
+    float: left;
+    width: 300px;
+    max-width: 100%;
+}
+
+.main_header .wc_contact{
+    float: right;
+    text-align: right;
+    padding: 20px 0;
+}
+
+.main_header .wc_contact h1{
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #777;
+    line-height: 1;
+}
+
+.main_header .wc_contact p{
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #777;
+}
+
+.wc_imobi_nav{
+    display: block;
+    width: 100%;
+    background: #444;
+}
+
+.wc_imobi_nav .content{
+    padding: 0;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.wc_imobi_nav .li{
+    display: inline-block;
+    position: relative;
+}
+
+.wc_imobi_nav a{
+    display: inline-block;
+    font-size: 0.9em;
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.wc_imobi_nav .login{
+    float: right;
+}
+
+.wc_imobi_nav .li:hover,
+.wc_imobi_nav .li a:hover{
+    background: #008B6F;
+}
+
+.wc_imobi_nav .li:hover .sub,
+.wc_imobi_nav .li a:hover .sub{
+    display: block;
+}
+
+.imobi_search_code{
+    float: right;
+    padding: 15px 20px;
+    background: #000;
+}
+
+.imobi_search_code:hover{
+    background: #000 !important;
+}
+
+.imobi_search_code input,
+.imobi_search_code button{
+    display: inline-block;
+    width: 30%;
+    padding: 5px;
+    border: none;
+    vertical-align: middle;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    margin: 0;
+}
+
+.imobi_search_code input{
+    padding: 7px;
+    width: 70%
+}
+
+.wc_imobi_nav .sub{
+    position: absolute;
+    display: none;
+    width: 300px;
+    background: #444;
+    left: 0;
+    top: 100%;
+    z-index: 99;
+}
+
+.wc_imobi_nav .sub li a,
+.wc_imobi_nav .sub li{
+    display: block;
+    width: 100%;
+}
+
+.section_header{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section_header h1{
+    text-transform: uppercase;
+    color: #666;
+}
+
+.section_header p{
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.workcontrol_imobi_filter{
+    background: #eee;
+}
+
+.realty_item{
+    box-shadow: 0px 0px 2px 1px #ccc;
+}
+
+.realty_item_header{
+    position: relative;
+}
+
+.realty_item_header h1{
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    font-size: 1em;
+    font-weight: 600;
+    color: #fff;
+}
+
+.realty_item_header a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.realty_item_header a:hover{
+    text-decoration: underline;
+}
+
+.realty_transaction{
+    position: absolute;
+    left: 0;
+    top: 20px;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.realty_transaction.cs3{
+    background: #00B490;
+}
+
+.realty_transaction.cs2{
+    background: #008B6F;
+}
+
+.realty_transaction.cs1{
+    background: #e09595;
+}
+
+.realty_observation{
+    position: absolute;
+    left: 0;
+    top: 48px;
+    padding: 5px 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #fff;
+    background: #333;
+    text-transform: uppercase;
+}
+
+.realty_item_content{
+    padding: 10px;
+}
+
+.realty_item_content p{
+    display: inline-block;
+    padding: 5px 10px;
+    width: 50%;
+    padding-left: 40px;
+    background-size: 20px;
+    background-position: center left 10px;
+    background-repeat: no-repeat;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: #777;
+}
+
+.realty_item.box4 .realty_item_header h1{
+    position: relative;
+    background: #333;
+    font-size: 0.875em;
+}
+
+.realty_item.box4 .realty_item_content p{
+    font-size: 0.5em;
+    padding: 0;
+    padding-left: 35px;
+}
+
+.realty_item_content p b{
+    font-size: 1.1em;
+    color: #000;
+}
+
+.realty_item_content .price{
+    background-image: url(icons/price.png);
+}
+
+.realty_item_content .ref{
+    background-image: url(icons/ref.png);
+}
+
+.realty_item_content .city{
+    background-image: url(icons/city.png);
+}
+
+
+.realty_item_content .district{
+    background-image: url(icons/district.png);
+}
+
+
+.realty_item_content .built{
+    background-image: url(icons/built.png);
+}
+
+.realty_item_content .total{
+    background-image: url(icons/total.png);
+}
+
+.realty_item_content .bed{
+    background-image: url(icons/bedrooms.png);
+}
+
+.realty_item_content .aparts{
+    background-image: url(icons/aparts.png);
+}
+
+.realty_item_content .bat{
+    background-image: url(icons/bat.png);
+}
+
+.realty_item_content .parking{
+    background-image: url(icons/parking.png);
+}
+
+.realty_item_content .full{width: 100% !important;}
+
+.realty_item_price{
+    font-size: 1.4em;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px;
+    background: #eee;
+    color: #444;
+    text-shadow: 1px 1px 1px #fcfcfc;
+}
+
+.wc_imobi_featured{
+    background: #eee;
+}
+
+.wc_imobi_featured .realty_item{
+    background: #fff;
+}
+
+.wc_footer{
+    background: #333 url(images/footer-map.png) center right 10% no-repeat;
+    color: #fff;
+}
+
+.wc_imobi_footerinfo p{
+    margin-top: 20px;
+    font-size: 0.7em;
+}
+
+.wc_imobi_footerlinks{
+    padding: 0 30px;
+}
+
+.wc_imobi_footercontact h1,
+.wc_imobi_footerlinks h1{
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ccc;
+}
+
+.wc_imobi_footerlinks a{
+    color: #ccc;
+    display: block;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-decoration: none;
+}
+
+.wc_imobi_footerlinks a:hover{
+    color: #fff;
+}
+
+.wc_imobi_footercontact p{
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.paginator{
+    display: block;
+    width: 100%;
+    padding: 30px 0 0 0;
+    margin: 30px 0 0 0;
+    border-top: 1px dotted #ccc;
+    text-align: center;
+}
+
+.paginator li{
+    display: inline-block;
+}
+
+.paginator li a,
+.paginator li span{
+    display: inline-block;
+    padding: 5px 10px;
+    background: #008B6F;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 3px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.paginator li a:hover{
+    background: #00B490;
+}
+
+.paginator li .active{
+    background: #666;
+}
+
+.imobi_single{
+    background: #eee;
+}
+
+.imobi_single_desc{
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+.imobi_single_gb{
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
+}
+
+.imobi_single_gb{
+    padding-right: 40px;
+}
+
+.imobi_single_gb aside{
+    display: block;
+    width: 100%;
+    padding: 5px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.imobi_single_gb aside article{
+    display: inline-block;
+    width: 20%;
+    padding: 5px;
+}
+
+.imobi_single_gb aside article:hover{
+    background: #008B6F;
+}
+
+.imobi_single_gb aside .active,
+.imobi_single_gb aside .active:hover{
+    background: #00B490;
+    cursor: default;
+}
+
+.imobi_single_desc header h2{
+    font-size: 1.6em;
+    font-weight: 600;
+    line-height: 1;
+    color: #008B6F;
+}
+
+.imobi_brokers{
+    text-align: center;
+    background: #008B6F url(images/footer-map.png) center right 10% no-repeat;
+    color: #fff;
+    font-size: 1.3em;
+    text-shadow: 0px 1px 1px #000;
+}
+
+.imobi_brokers p:last-of-type{
+    font-size: 0.7em;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.imobi_single_desc h3{
+    font-size: 1em;
+    font-weight: 300;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+}
+
+.imobi_single_desc .realty_item_content{
+    padding: 0;
+}
+
+.imobi_single_desc .realty_item_content p{
+    display: inline-block;
+    width: 100%;
+    padding: 8px 0 8px 25px;
+    background-position: center left;
+    border-bottom: 1px solid #ccc;
+}
+
+.imobi_single_desc .realty_item_content b{
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.single_imobi_desc{
+    background: #fff;
+    font-size: 1.1em;
+}
+
+.imobi_single_part h3{
+    font-size: 2em;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.imobi_single_part span{
+    display: inline-block;
+    padding: 10px;
+    background: #00B490;
+    border: 3px solid #eee;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875em;
+}
+
+.imobi_single_part span b{
+    display: inline-block;
+    padding: 5px 11px;
+    background: #008B6F;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+.page_content{
+    background: #fbfbfb;
+    padding: 20px;
+}
+
+.page_content header{
+    text-align: right;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.page_content .htmlchars{
+    padding: 0;
+}
+
+@media (max-width: 30em){
+    .wc_imobi_footerlinks{
+        padding: 0;
+    }
+}
+
+@media (max-width: 44em){
+    .main_header .wc_logo{
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .main_header .wc_contact{
+        float: none;
+        text-align: center;
+        font-size: 0.8em;
+    }
+
+    .wc_slide_item_desc p{
+        display: none;
+    }
+}
+
+@media (max-width: 48em){
+    .wc_imobi_footerlinks{
+        padding-right: 0;
+    }
+
+    .imobi_single_desc,
+    .imobi_single_gb{
+        width: 100%;
+        padding: 0;
+    }
+
+    .imobi_single_desc{
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 56em){
+    .content{
+        width: 90%;
+    }
+
+    .realty_item .realty_item_header h1{
+        position: relative;
+        background: #333;
+        font-size: 0.875em;
+    }
+
+    .realty_item .realty_item_content p{
+        font-size: 0.5em;
+        padding: 0;
+        padding-left: 35px;
+    }
+
+    .wc_slides{
+        width: 100%;
+    }
+}
+
+@media (max-width: 70em){
+    .wc_imobi_nav{
+        display: none;
+    }
+
+    .wc_imobi_nav li,
+    .wc_imobi_nav a,
+    .wc_imobi_nav .content{
+        display: block;
+        width: 100%;
+    }
+
+    .wc_imobi_nav .sub{
+        position: initial;
+        display: block;
+        width: auto;
+    }
+
+    .wc_imobi_nav .sub a:hover{
+        background: #000;
+    }
+
+    .wc_mobile_nav{
+        display: block;
+    }
+}

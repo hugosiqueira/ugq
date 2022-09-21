@@ -29,6 +29,7 @@ $(function () {
     $(".formTime").mask("99/99/9999 99:99");
     $(".formCep").mask("99999-999");
     $(".formCpf").mask("999.999.999-99");
+	$(".formHour").mask("99:99 - 99:99");
 
     $('.formPhone').focusout(function () {
         var phone, element;

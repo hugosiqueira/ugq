@@ -100,7 +100,7 @@
                     </table>
                 </div>
                 <div id="footer">
-                    Todos os direitos reservados!
+                    Gerado por Work Control® - Todos os direitos reservados!
                 </div>
             </body>
         </html>

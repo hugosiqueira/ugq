@@ -27,7 +27,7 @@ if ($UserId):
             exit;
         endif;
     else:
-        $_SESSION['trigger_controll'] = "<b>OPPSS {$Admin['user_name']}</b>, você tentou editar um usuário que não existe ou que foi removido recentemente!";
+        $_SESSION['trigger_controll'] = "<b>OPPSS {$Admin['user_name']}</b>, você tentou editar um usurio que não existe ou que foi removido recentemente!";
         header('Location: dashboard.php?wc=users/home');
         exit;
     endif;
@@ -44,18 +44,18 @@ endif;
 
 <header class="dashboard_header">
     <div class="dashboard_header_title">
-        <h1 class="icon-user-plus">Novo Usuário</h1>
+        <h1 class="icon-user-plus">Novo Colaborador</h1>
         <p class="dashboard_header_breadcrumbs">
             &raquo; <?= ADMIN_NAME; ?>
             <span class="crumb">/</span>
-            <a title="<?= ADMIN_NAME; ?>" href="dashboard.php?wc=users/home">Usuários</a>
+            <a title="<?= ADMIN_NAME; ?>" href="dashboard.php?wc=users/home">Colaboradores</a>
             <span class="crumb">/</span>
-            Novo Usuário
+            Novo Colaborador
         </p>
     </div>
 
     <div class="dashboard_header_search" style="font-size: 0.875em; margin-top: 16px;" id="<?= $UserId; ?>">
-        <span rel='dashboard_header_search' class='j_delete_action icon-warning btn btn_red' id='<?= $UserId; ?>'>Deletar Usuário!</span>
+        <span rel='dashboard_header_search' class='j_delete_action icon-warning btn btn_red' id='<?= $UserId; ?>'>Deletar Colaborador!</span>
         <span rel='dashboard_header_search' callback='Users' callback_action='delete' class='j_delete_action_confirm icon-warning btn btn_yellow' style='display: none' id='<?= $UserId; ?>'>EXCLUIR AGORA!</span>
     </div>
 </header>
@@ -65,7 +65,7 @@ endif;
         <article class="wc_tab_target wc_active" id="profile">
 
             <div class="panel_header default">
-                <h2 class="icon-user-plus">Dados de <?= $user_name; ?></h2>
+                <h2 class="icon-user-plus">DADOS PESSOAIS DE <?= strtoupper($user_name); ?></h2>
             </div>
 
             <div class="panel">
@@ -77,28 +77,17 @@ endif;
                         <span class="legend">Primeiro nome:</span>
                         <input value="<?= $user_name; ?>" type="text" name="user_name" placeholder="Primeiro Nome:" required />
                     </label>
-
-                    <label class="label">
-                        <span class="legend">Sobrenome:</span>
-                        <input value="<?= $user_lastname; ?>" type="text" name="user_lastname" placeholder="Sobrenome:" required />
-                    </label>
-
-                    <label class="label">
-                        <span class="legend">Foto (<?= AVATAR_W; ?>x<?= AVATAR_H; ?>px, JPG ou PNG):</span>
-                        <input type="file" name="user_thumb" class="wc_loadimage" />
-                    </label>
-                    <div class="label_50">
-                        <label class="label">
-                            <span class="legend">Registro Funcional - Unifesp/HSP:</span>
-                            <input value="<?= $user_rf; ?>" type="text" name="user_rf"  placeholder="RF:" />
-                        </label>
-
-                        <label class="label">
-                            <span class="legend">Siape:</span>
-                            <input value="<?= $user_siape; ?>" type="text" name="user_siape" " placeholder="Siape:" />
-                        </label>
-                    </div>
-                    <div class="label_50">
+					<div class="label_50">
+						<label class="label">
+							<span class="legend">Foto (<?= AVATAR_W; ?>x<?= AVATAR_H; ?>px, JPG ou PNG):</span>
+							<input type="file" name="user_thumb" class="wc_loadimage" />
+						</label>
+						<label class="label">
+							<span class="legend">Data de Nascimento:</span>
+							<input value="<?= $user_datebirth; ?>" type="date" name="user_datebirth"  placeholder="Data de nascimento:" />
+						</label>
+					</div>
+					<div class="label_50">
                         <label class="label">
                             <span class="legend">CPF:</span>
                             <input value="<?= $user_document; ?>" type="text" name="user_document" class="formCpf" placeholder="CPF:" />
@@ -109,6 +98,48 @@ endif;
                             <input value="<?= $user_rg; ?>" type="text" name="user_rg"  placeholder="RG:" />
                         </label>
                     </div>
+					<div class="label_50">
+						
+						<label class="label">
+							<span class="legend">Escolaridade:</span>
+							<select name="user_scholarity" required>
+								<option selected disabled value="">Selecione a escolaridade:</option>
+								<?php
+								$Read->FullRead("SELECT * FROM ugq_scholarity ORDER BY scholarity ASC;");
+								if ($Read->getResult()):
+									foreach ($Read->getResult() as $ugq_scholarity):
+									($user_scholarity === $ugq_scholarity['id'] ? $select="selected=selected": $select=""); 
+										echo "<option value={$ugq_scholarity['id']} {$select}>{$ugq_scholarity['scholarity']}</option>";
+									endforeach;
+								endif;
+								?>
+							</select>
+						</label>
+						<label class="label">
+							<span class="legend">Instituição de Ensino:</span>
+							<input value="<?= $user_university; ?>" type="text" name="user_university" placeholder="Instituição de Ensino" />
+						</label>
+					</div>
+					<div class="label_50">
+						<label class="label">
+							<span class="legend">Curso da Graduação/Técnico:</span>
+							<input value="<?= $user_graduation; ?>" type="text" name="user_graduation" placeholder="Curso da Graduação/Técnico" />
+						</label>
+						<label class="label">
+							<span class="legend">Ano que se formou:</span>
+							<input value="<?= $user_year_graduation; ?>" type="number" name="user_year_graduation" placeholder="Ano que se formou" />
+						</label>
+					</div>
+					<div class="label_50">
+						<label class="label">
+							<span class="legend">Conselho:</span>
+							<input value="<?= $user_council; ?>" type="text" name="user_council" placeholder="Conselho da profissão" />
+						</label>
+						<label class="label">
+							<span class="legend">E-mail Pessoal:</span>
+							<input value="<?= $user_email; ?>" type="email" name="user_email" placeholder="E-mail:" />
+						</label>
+					</div>
 
                     <div class="label_50">
                         <label class="label">
@@ -122,23 +153,152 @@ endif;
                         </label>
                     </div>
 
-                    <label class="label">
-                        <span class="legend">E-mail Pessoal:</span>
-                        <input value="<?= $user_email; ?>" type="email" name="user_email" placeholder="E-mail:" required />
-                    </label>
+                   
+					<div class="clear"></div>
+                    <h3 class="students_gerent_subtitle icon-user-tie m_botton">Dados Institucionais:</h3>
+					<div class="label_50">
+                        <label class="label">
+                            <span class="legend">Registro Funcional - Unifesp/HSP:</span>
+                            <input value="<?= $user_rf; ?>" type="text" name="user_rf"  placeholder="RF:" />
+                        </label>
 
-                    <label class="label">
-                        <span class="legend">E-mail Institucional:</span>
-                        <input value="<?= $user_inst_email; ?>" type="email" name="user_inst_email" placeholder="E-mail: @huhsp.org.br" required />
-                    </label>
+                        <label class="label">
+                            <span class="legend">Siape:</span>
+                            <input value="<?= $user_siape; ?>" type="text" name="user_siape" " placeholder="Siape:" />
+                        </label>
+                    </div>
+					<div class="label_50">
+                        <label class="label">
+                            <span class="legend">Instituição:</span>
+							<select name="user_employer" required>
+								<option selected disabled value="">Selecione a Instituição:</option>
+								<option value="UNIFESP" <?= ($user_employer == "UNIFESP" ? 'selected="selected"' : ''); ?>>UNIFESP</option>
+								<option value="SPDM" <?= ($user_employer == "SPDM" ? 'selected="selected"' : ''); ?>>SPDM</option>
+							</select>
+                        </label>
 
-                    <label class="label">
-                        <span class="legend">Senha:</span>
-                        <input value="" type="password" name="user_password" placeholder="Senha:" />
-                    </label>
+                        <label class="label">
+                            <span class="legend">Cargo:</span>
+							<select name="user_role" required>
+							<?php
+							$Read->FullRead("SELECT id, role FROM ugq_roles ORDER BY role ASC;");
+							if ($Read->getResult()):
+							
+								foreach ($Read->getResult() as $ugq_role):
+								($user_role === $ugq_role['id'] ? $select="selected=selected": $select=""); 
+									echo "<option value={$ugq_role['id']} {$select} >{$ugq_role['role']}</option>";
+								endforeach;
+							endif;
+							?>
+							</select>
+                        </label>
+                    </div>
+					<div class="label_50">
+                        <label class="label">
+                            <span class="legend">Setor:</span>
+							<select name="user_department" required>
+							<?php
+							$Read->FullRead("SELECT id, department FROM ugq_department ORDER BY department ASC;");
+							if ($Read->getResult()):
+								foreach ($Read->getResult() as $ugq_department):
+								($user_department === $ugq_department['id'] ? $select="selected=selected": $select=""); 
+									echo "<option value={$ugq_department['id']} {$select} >{$ugq_department['department']}</option>";
+								endforeach;
+							endif;
+							?>
+							</select>
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Sub-setor:</span>
+                            <select name="user_section">
+							<?php
+							$Read->FullRead("SELECT id, section FROM ugq_section ORDER BY section ASC;");
+							if ($Read->getResult()):
+								foreach ($Read->getResult() as $ugq_section):
+								($user_section === $ugq_section['id'] ? $select="selected=selected": $select=""); 
+									echo "<option value={$ugq_section['id']} {$select} >{$ugq_section['section']}</option>";
+								endforeach;
+							endif;
+							?>
+							</select>
+                        </label>
+                    </div>
+                    
+					<div class="label_50">
+                        <label class="label">
+                            <span class="legend">Data de Admisssão:</span>
+                            <input value="<?= $user_admission; ?>" type="date" name="user_admission"  placeholder="Data de admissão:" />
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Último Periódico:</span>
+                            <input value="<?= $user_periodico; ?>" type="date" name="user_periodico" " placeholder="Data do último exame periódico:" />
+                        </label>
+                    </div>
+					<div class="label_50">
+                        <label class="label">
+                            <span class="legend">Carga Horária:</span>
+							<select name="user_hour">
+								<option>Selecione a carga horária</option>
+								<option value=30 <?=($user_hour == 30 ? "selected=selected" : "");?>>30h</option>
+								<option value=40 <?=($user_hour == 40 ? "selected=selected" : "");?>>40h</option>
+								<option value=12 <?=($user_hour == 12 ? "selected=selected" : "");?>>12x36h</option>
+							</select>
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Horário de Trabalho:</span>
+                            <input value="<?= $user_time; ?>" type="text" class="formHour" name="user_time" " placeholder="Horário de Trabalho:" />
+                        </label>
+                    </div>
+                    <div class="label_50">
+                        <label class="label">
+                            <span class="legend">É supervisor do setor?</span>
+                            <select name="user_supervisor">
+								<option value=0 <?=($user_supervisor == 0 ? "selected=selected" : "");?>>Não</option>
+								<option value=1 <?=($user_supervisor == 1 ? "selected=selected" : "");?>>Sim</option>
+							</select>
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Faz parte da equipe da qualidade?</span>
+                            <select name="user_quality">
+								<option value=0 <?=($user_quality == 0 ? "selected=selected" : "");?>>Não</option>
+								<option value=1 <?=($user_quality == 1 ? "selected=selected" : "");?>>Sim</option>
+							</select>
+                        </label>
+                    </div>
+					<div class="label_50">
+						<label class="label">
+							<span class="legend">E-mail Institucional:</span>
+							<input value="<?= $user_inst_email; ?>" type="email" name="user_inst_email" placeholder="E-mail: @huhsp.org.br"/>
+						</label>
+
+						<label class="label">
+							<span class="legend">Senha:</span>
+							<input value="" type="password" name="user_password" placeholder="Senha:" />
+						</label>
+					</div>
+					<div class="label_50">
+						<label class="label">
+							<span class="legend">Situaço:</span>
+							<select name="user_status" required>
+								<option selected disabled value="">Selecione a situação do colaborador:</option>
+							<?php
+							$Read->FullRead("SELECT id, status FROM ugq_user_status ORDER BY status ASC;");
+							if ($Read->getResult()):
+								foreach ($Read->getResult() as $ugq_status):
+								($user_status === $ugq_status['id'] ? $select="selected=selected": $select=""); 
+									echo "<option value={$ugq_status['id']} {$select} >{$ugq_status['status']}</option>";
+								endforeach;
+							endif;
+							?>
+							</select>
+						</label>
 
                     <?php if ($user_level < 10 || $_SESSION['userLogin']['user_level'] == 10): ?>
-                        <div class="label_50">
+                        
                             <label class="label">
                                 <span class="legend">Nível de acesso:</span>
                                 <select name="user_level" required>
@@ -158,25 +318,10 @@ endif;
                                 </select>
                             </label>
 
-                            <label class="label">
-                                <span class="legend">Gênero do Usuário:</span>
-                                <select name="user_genre" required>
-                                    <option selected disabled value="">Selecione o Gênero do Usuário:</option>
-                                    <option value="1" <?= ($user_genre == 1 ? 'selected="selected"' : ''); ?>>Masculino</option>
-                                    <option value="2" <?= ($user_genre == 2 ? 'selected="selected"' : ''); ?>>Feminino</option>
-                                </select>
-                            </label>
-                        </div>
-                    <?php else: ?>
-                        <label class="label">
-                            <span class="legend">Gênero do Usuário:</span>
-                            <select name="user_genre" required>
-                                <option selected disabled value="">Selecione o Gênero do Usuário:</option>
-                                <option value="1" <?= ($user_genre == 1 ? 'selected="selected"' : ''); ?>>Masculino</option>
-                                <option value="2" <?= ($user_genre == 2 ? 'selected="selected"' : ''); ?>>Feminino</option>
-                            </select>
-                        </label>
+                            
+                        
                     <?php endif; ?>
+					</div>
                     <div class="clear"></div>
 
                     <img class="form_load none fl_right" style="margin-left: 10px; margin-top: 2px;" alt="Enviando Requisição!" title="Enviando Requisição!" src="_img/load.gif"/>
@@ -186,32 +331,7 @@ endif;
             </div>
         </article>
 
-        <?php if (APP_ORDERS): ?>
-            <div class="j_tab_index tab_orders box box100 wc_tab_target" id="orders" style="padding: 0; margin: 0; display: none;">
-                <div class="panel_header default">
-                    <h2 class="icon-cart">Pedidos de <?= $user_name; ?></h2>
-                </div>
-                <div class="panel">
-                    <?php
-                    $Read->ExeRead(DB_ORDERS, "WHERE user_id = :user ORDER BY order_status DESC, order_date DESC", "user={$user_id}");
-                    if (!$Read->getResult()):
-                        echo "<div class='trigger trigger_info trigger_none'><span class='al_center icon-info'>{$user_name} ainda não possui pedidos efetuados!</span></div>";
-                    else:
-                        foreach ($Read->getResult() as $Order):
-                            echo "<div class='single_user_order box box50' style='margin: 0;'>
-                                    <h1 class='icon-cart'>" . str_pad($Order['order_id'], 7, 0, STR_PAD_LEFT) . "</h1>
-                                    <p class='icon-calendar'>" . date('d/m/Y H\hi', strtotime($Order['order_date'])) . "</p>
-                                    <p>R$ " . number_format($Order['order_price'], '2', ',', '.') . " via " . getOrderPayment($Order['order_payment']) . "</p>
-                                    <p>" . getOrderStatus($Order['order_status']) . "</p>
-                                    <a class='icon-redo2' href='dashboard.php?wc=orders/order&id={$Order['order_id']}' title='Detalhes do Pedido'>Detalhes do Pedido</a>
-                                </div>";
-                        endforeach;
-                    endif;
-                    ?>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        <?php endif; ?>
+
 
         <article class="box box100 wc_tab_target" id="address" style="padding: 0; margin: 0; display: none;">
             <div class="panel_header default">
@@ -264,9 +384,7 @@ endif;
         <div class="panel">
             <div class="box_conf_menu">
                 <a class='conf_menu wc_tab wc_active' href='#profile'>Perfil</a>
-                <?php if (APP_ORDERS): ?>
-                    <a class='conf_menu wc_tab' href='#orders'>Pedidos</a>
-                <?php endif; ?>
+               
                 <a class='conf_menu wc_tab' href='#address'>Endereços</a>
             </div>
         </div>
