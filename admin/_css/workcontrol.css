@@ -494,10 +494,10 @@
 
 .dashboard_header_search{
     float: right;
-    /*width: auto;*/
+    width: auto;
     max-width: 100%;
     text-align: right;
-    width: 800px;
+
     margin-top: 15px;
 }
 
@@ -3963,7 +3963,7 @@ div.mce-fullscreen{z-index: 97;}
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-family: sans-serif;
     width: 99%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -3982,12 +3982,12 @@ div.mce-fullscreen{z-index: 97;}
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: #ececec;
 }
 
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
-/*.styled-table tbody tr:hover {
+.styled-table tbody tr:hover {
     color: #009879;
-}*/
+}

@@ -5,9 +5,9 @@
  */
 if ($_SERVER['HTTP_HOST'] == 'localhost'):
     define('SIS_DB_HOST', 'localhost'); //Link do banco de dados no localhost
-    define('SIS_DB_USER', 'agen_ugq'); //Usuário do banco de dados no localhost
-    define('SIS_DB_PASS', 'AsvfA3!#5N5kdHLA'); //Senha  do banco de dados no localhost
-    define('SIS_DB_DBSA', 'agen_ugq'); //Nome  do banco de dados no localhost
+    define('SIS_DB_USER', 'root'); //Usuário do banco de dados no localhost
+    define('SIS_DB_PASS', ''); //Senha  do banco de dados no localhost
+    define('SIS_DB_DBSA', 'ugq'); //Nome  do banco de dados no localhost
 else:
     define('SIS_DB_HOST', 'localhost'); //Link do banco de dados no servidor
     define('SIS_DB_USER', 'agen_ugq'); //Usuário do banco de dados no servidor
@@ -439,6 +439,22 @@ function getDept($department = null)
 	if ($Read->getResult()):
 		foreach ($Read->getResult() as $ugq_department):
 			return $ugq_department['department'];
+		endforeach;
+	else:
+		return "Não Informado";
+	endif;
+}
+
+function getnameUser($user = null)
+{
+	// AUTO INSTANCE OBJECT READ
+	if (empty($Read)):
+		$Read = new Read;
+	endif;
+    $Read->FullRead("SELECT user_name FROM ws_users WHERE user_id = :d", "d={$user}");
+	if ($Read->getResult()):
+		foreach ($Read->getResult() as $ugq_user):
+			return $ugq_user['user_name'];
 		endforeach;
 	else:
 		return "Não Informado";

@@ -9,16 +9,39 @@ if (DB_AUTO_TRASH):
     $Delete = new Delete;
     $Delete->ExeDelete(DB_PENDENCY, "WHERE description = :d", "d=Nova Pendência");
 endif;
-// AUTO INSTANCE OBJECT READ
 if (empty($Read)):
     $Read = new Read;
+endif;
+if (empty($Read2)):
+    $Read2 = new Read;
+endif;
+
+$S = filter_input(INPUT_GET, "s", FILTER_DEFAULT);
+$O = filter_input(INPUT_GET, "opt", FILTER_DEFAULT);
+$D = filter_input(INPUT_GET, "d", FILTER_DEFAULT);
+
+$WhereString = (!empty($S) ? " AND (description LIKE '%{$S}%' " : "");
+$WhereOpt = ((!empty($O)) ? " AND fgk_type_pendency = $O" : "");
+$WhereDepartment = ((!empty($D)) ? " AND fgk_department = {$D}" : "");
+
+$Search = filter_input_array(INPUT_POST);
+if ($Search && (isset($Search['s']) || isset($Search['opt']) || isset($Search['d']) )):
+    $S = urlencode($Search['s']);
+    $O = urlencode($Search['opt']);
+	$D = urlencode($Search['d']);
+    header("Location: dashboard.php?wc=pendencias/home&opt={$O}&s={$S}&d={$D}"); 
+    exit;
 endif;
 
 ?>
 
 <header class="dashboard_header">
+<a class='btn btn_blue icon-plus' href='dashboard.php?wc=pendencias/create' style="float:right;" title='Nova Pendência!'>Nova Pendência</a>
+
     <div class="dashboard_header_title">
-        <h1 class="icon-pencil">Pendências com a UGQ</h1>
+
+        <h1 class="icon-calendar">Pendências com a UGQ</h1>
+
         <p class="dashboard_header_breadcrumbs">
             &raquo; <?= ADMIN_NAME; ?>
             <span class="crumb">/</span>
@@ -26,9 +49,42 @@ endif;
             <span class="crumb">/</span>
             Pendências com a UGQ
         </p>
+
     </div>
     <div class="dashboard_header_search">
-        <a class='btn btn_green icon-plus' href='dashboard.php?wc=pendencias/create' title='Nova Pendência!'>Nova Pendência</a>
+    <form name="searchPendency" action="" method="post" enctype="multipart/form-data" class="ajax_off">
+
+            <input type="search" value="<?= $S; ?>" name="s" placeholder="Pesquisar:" style="width: 15%; margin-right: 3px;" />
+			<select name="d" style="width: 15%; margin-right: 3px; padding: 5px">
+                <option value="">Todos Setores</option>
+				<?php
+				$Read->FullRead("SELECT id, department FROM ugq_department WHERE is_active = :a ORDER BY department ASC;", "a=1");
+				if ($Read->getResult()):
+					foreach ($Read->getResult() as $ugq_department):
+					($D === $ugq_department['id'] ? $select="selected=selected": $select=""); 
+						echo "<option value={$ugq_department['id']} {$select} >{$ugq_department['department']}</option>";
+					endforeach;
+				endif;
+				?>
+
+            </select>
+			<select name="opt" style="width: 15%; margin-right: 3px; padding: 5px">
+                <option value="">Todas categorias</option>
+				<?php
+				$Read->FullRead("SELECT id, type_pendency FROM ugq_type_pendency  ORDER BY type_pendency ASC;");
+				if ($Read->getResult()):
+				
+					foreach ($Read->getResult() as $ugq_type_pendency):
+					($O === $ugq_type_pendency['id'] ? $select="selected=selected": $select=""); 
+						echo "<option value={$ugq_type_pendency['id']} {$select} >{$ugq_type_pendency['type_pendency']}</option>";
+					endforeach;
+				endif;
+				?>
+
+            </select>
+			
+            <button class="btn btn_green icon icon-search icon-notext"></button>
+        </form>
     </div>
 </header>
 
@@ -44,15 +100,14 @@ endif;
 				<th width='10%'>Responsável</th>
 				<th width='27%'>Descrição</th>
                 <th width='1%'></th>
-                <th width='1%'></th>
             </thead>
             <tbody>
     <?php
     $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
     $Page = ($getPage ? $getPage : 1);
-    $Pager = new Pager("dashboard.php?wc=pendencias/home&page=", "<<", ">>", 5);
+    $Pager = new Pager("dashboard.php?wc=pendencias/home&opt={$O}&s={$S}&d={$D}&page=", "<<", ">>", 5);
     $Pager->ExePager($Page, 50);
-    $Read->FullRead("SELECT *, ". DB_PENDENCY.".id as pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department ORDER BY date_limit ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
+    $Read->FullRead("SELECT *, ". DB_PENDENCY.".id as pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
     if (!$Read->getResult()):
         $Pager->ReturnPage();
         echo Erro("<span class='al_center icon-notification'>Ainda não existem pendências cadastradas, {$Admin['user_name']}. Comece agora mesmo cadastrando uma nova pendência!</span>", E_USER_NOTICE);
@@ -62,6 +117,16 @@ endif;
 			($status == 0 && ($date_limit < date('Y-m-d')) ? $status= "Atrasado" : $status= "No prazo");
 			$date_delivery = date('d/m/Y', strtotime($date_delivery));
 			$date_limit = date('d/m/Y', strtotime($date_limit));
+            if(strripos($responsible, ",")):
+                
+                $colaboradores = "";
+                $user = explode(",", $responsible); 
+                foreach ($user as $users):
+                    $colaboradores=$colaboradores."".getNameUser(intval($users))." / ";
+                endforeach;
+            else:
+                $colaboradores=getNameUser($responsible);   
+            endif;
             echo "
                     
                     <tr>
@@ -70,10 +135,9 @@ endif;
 					<td>{$date_delivery}</td>
 					<td>{$date_limit}</td>
 					<td>{$status}</td>
-					<td>{$responsible}</td>
+					<td>{$colaboradores}</td>
 					<td>{$description}</td>
                     <td><a href='dashboard.php?wc=projetos/create&id={$pendency_id}' class=' btn btn_blue'> Editar</a></td>
-                    <td><span callback='Project' callback_action='window_delete_project' data-id='{$pendency_id}'  class='j_ajaxModal btn btn_red'> Excluir</span></td>                  
                     </tr>
                     
                 ";
