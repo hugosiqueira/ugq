@@ -108,8 +108,25 @@ endif;
                 </div>
                 <ul class="dashboard_nav_menu">
                     <li class="dashboard_nav_menu_li <?= $getViewInput == 'home' ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-home" title="Dashboard" href="dashboard.php?wc=home">Dashboard</a></li>
-
+                    <li class="dashboard_nav_menu_li"><a target="_blank" class="icon-calendar" title="Ver Site" href="dashboard.php?wc=pendencias/home">Pendências</a></li>
                     <?php
+                    if (APP_USERS && $_SESSION['userLogin']['user_level'] >= LEVEL_WC_USERS):
+                        ?>
+                        <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'users/') ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-users" title="Colaboradores" href="dashboard.php?wc=users/home">Colaboradores</a>
+                            <ul class="dashboard_nav_menu_sub">
+                                <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'users/home' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Ver Usuários" href="dashboard.php?wc=users/home">&raquo; Ver Usuários</a></li>
+                                <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'users/create' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Novo Usuário" href="dashboard.php?wc=users/create">&raquo; Novo Usuário</a></li>
+                            </ul>
+                        </li>
+                        <?php
+                    endif;
+
+                    //SISWC verifica personalizações!
+                    if (ADMIN_WC_CUSTOM && file_exists(__DIR__ . "/_siswc/wc_menu.php")):
+                        require __DIR__ . "/_siswc/wc_menu.php";
+                    endif;
+
+                    
                     if (APP_POSTS && $_SESSION['userLogin']['user_level'] >= LEVEL_WC_POSTS):
                         $wc_posts_alerts = null;
                         $Read->FullRead("SELECT count(post_id) as total FROM " . DB_POSTS . " WHERE post_status != 1");
@@ -177,24 +194,8 @@ endif;
                                     <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/support' && $SupportEadStatus == 2 ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Tickets Respondidos" href="dashboard.php?wc=teach/support&support_status=2">&raquo; Respondidos</a></li>
                                     <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/support' && $SupportEadStatus == 3 ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Tickets Concluídos" href="dashboard.php?wc=teach/support&support_status=3">&raquo; Concluídos</a></li>
                                 </ul>
-                            </li><?php endif; ?>
-                        <?php if ($Admin['user_level'] >= LEVEL_WC_EAD_ORDERS): ?><li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'teach/orders') ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-codepen" title="Matrículas" href="dashboard.php?wc=teach/orders">Matrículas <?= $wc_ead_orders_alerts; ?></a>
-                                <ul class="dashboard_nav_menu_sub">
-                                    <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/orders' && $OrdersEadStatus != 'chargeback' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Todos os Pedidos" href="dashboard.php?wc=teach/orders">&raquo; Pedidos</a></li>
-                                    <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/orders_sales' && $OrdersEadStatus != 'chargeback' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Vendas" href="dashboard.php?wc=teach/orders_sales">&raquo; Vendas</a></li>
-                                    <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/orders_signatures' && $OrdersEadStatus != 'chargeback' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Assinaturas" href="dashboard.php?wc=teach/orders_signatures">&raquo; Assinaturas</a></li>
-                                    <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/orders' && $OrdersEadStatus == 'chargeback' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Pedidos Com Chargeback" href="dashboard.php?wc=teach/orders&status=chargeback">&raquo; Chargebacks <?= $wc_ead_orders_alerts; ?></a></li>
-                                </ul>
-                            </li><?php endif; ?>
+                            </li><?php endif; ?>                   
                         <?php
-                    endif;
-
-
-
-
-                    //SISWC verifica personalizações!
-                    if (ADMIN_WC_CUSTOM && file_exists(__DIR__ . "/_siswc/wc_menu.php")):
-                        require __DIR__ . "/_siswc/wc_menu.php";
                     endif;
 
                     if (APP_SLIDE && $_SESSION['userLogin']['user_level'] >= LEVEL_WC_SLIDES):
@@ -224,18 +225,7 @@ endif;
                         <?php
                     endif;
 
-                    if (APP_USERS && $_SESSION['userLogin']['user_level'] >= LEVEL_WC_USERS):
-                        ?>
-                        <li class="dashboard_nav_menu_li <?= strstr($getViewInput, 'users/') ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-users" title="Colaboradores" href="dashboard.php?wc=users/home">Colaboradores</a>
-                            <ul class="dashboard_nav_menu_sub">
-                                <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'users/home' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Ver Usuários" href="dashboard.php?wc=users/home">&raquo; Ver Usuários</a></li>
-                                <li class="dashboard_nav_menu_sub_li <?= strstr($getViewInput, 'users/home&opt=customers') ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Clientes" href="dashboard.php?wc=users/home&opt=customers">&raquo; Clientes</a></li>
-                                <li class="dashboard_nav_menu_sub_li <?= strstr($getViewInput, 'users/home&opt=team') ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Equipe" href="dashboard.php?wc=users/home&opt=team">&raquo; Equipe</a></li>
-                                <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'users/create' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Novo Usuário" href="dashboard.php?wc=users/create">&raquo; Novo Usuário</a></li>
-                            </ul>
-                        </li>
-                        <?php
-                    endif;
+                   
 
                     if ($_SESSION['userLogin']['user_level'] >= LEVEL_WC_REPORTS):
                         ?>
@@ -245,7 +235,6 @@ endif;
                                 <?php if (APP_EAD): ?>
                                     <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/report_students' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Relatório de Alunos" href="dashboard.php?wc=teach/report_students">&raquo; Alunos</a></li>
                                     <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/report_support' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Relatório de Suporte" href="dashboard.php?wc=teach/report_support">&raquo; Suporte</a></li>
-                                    <li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'teach/report_sales' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Relatório de Vendas" href="dashboard.php?wc=teach/report_sales">&raquo; Vendas</a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>
@@ -259,14 +248,11 @@ endif;
                                 <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_MASTER): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/home' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Configurações Gerais" href="dashboard.php?wc=config/home">&raquo; Configurações Gerais</a></li><?php endif; ?>
                                 <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_MASTER): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/license' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Licenciar Domínio" href="dashboard.php?wc=config/license">&raquo; Licenciar Domínio</a></li><?php endif; ?>
                                 <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_CODES): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/codes' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="Gerenciar Pixels" href="dashboard.php?wc=config/codes">&raquo; Gerenciar Pixels</a></li><?php endif; ?>
-                                <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_API): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/wcapi' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="WorkControl API" href="dashboard.php?wc=config/wcapi">&raquo; Work Control® API</a></li><?php endif; ?>
-                                <?php if ($Admin['user_level'] >= LEVEL_WC_CONFIG_MASTER): ?><li class="dashboard_nav_menu_sub_li <?= $getViewInput == 'config/sample' ? 'dashboard_nav_menu_active' : ''; ?>"><a title="WorkControl Samples" href="dashboard.php?wc=config/samples">&raquo; Work Control® Samples</a></li><?php endif; ?>
                             </ul>
                         </li>
                         <?php
                     endif;
                     ?>
-					<li class="dashboard_nav_menu_li"><a target="_blank" class="icon-calendar" title="Ver Site" href="dashboard.php?wc=pendencias/home">Pendências</a></li>
                     <!--
                     <li class="dashboard_nav_menu_li"><a class="icon-lifebuoy" title="Suporte" href="dashboard.php?wc=home">Suporte</a></li>
                     -->

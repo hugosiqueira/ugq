@@ -92,13 +92,13 @@ endif;
     <article class='project_dashboard box box100'>
         <table class='styled-table'>
             <thead>
-                <th width='20%'>Setor</th>
+                <th width='19%'>Setor</th>
                 <th width='10%'>Categoria</th>
-				<th width='10%'>Data de Entrega</th>
-				<th width='10%'>Data para Devolução</th>
+				<th width='6%'>Entrega</th>
+				<th width='6%'>Devolução</th>
 				<th width='10%'>Status</th>
-				<th width='10%'>Responsável</th>
-				<th width='27%'>Descrição</th>
+				<th width='14%'>Responsável</th>
+				<th width='30%'>Descrição</th>
                 <th width='1%'></th>
             </thead>
             <tbody>
