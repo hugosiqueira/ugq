@@ -120,8 +120,6 @@ if (!$WorkControlDefineConf):
      */
     define('APP_LINK_POSTS', 1); //Posts
     define('APP_LINK_PAGES', 1); //Páginas
-    define('APP_LINK_PRODUCTS', 1); //Produtos
-    define('APP_LINK_PROPERTIES', 1); //Imóveis
 
     /*
      * ACCOUNT CONFIG

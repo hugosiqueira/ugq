@@ -33,10 +33,6 @@ endif;
 $getViewInput = filter_input(INPUT_GET, 'wc', FILTER_DEFAULT);
 $getView = ($getViewInput == 'home' ? 'home' . ADMIN_MODE : $getViewInput);
 
-//PARA SUA SEGURANÇA, NÃO REMOVA ESSA VALIDAÇÃO!
-if (!file_exists("dashboard.json")):
-    echo "<span class='wc_domain_license icon-key icon-notext wc_tooltip radius'></span>";
-endif;
 
 //SITEMAP GENERATE (1X DAY)
 $SiteMapCheck = fopen('sitemap.txt', "a+");
@@ -82,6 +78,12 @@ endif;
         <script src="../_cdn/highcharts.js"></script>
         <script src="../_cdn/datepicker/datepicker.min.js"></script>
         <script src="../_cdn/datepicker/datepicker.pt-BR.js"></script>
+
+        
+        <!-- tablesorter plugin -->
+        <script src="../_cdn/tablesorter/dist/js/jquery.tablesorter.js"></script>
+        <!-- tablesorter widget file - loaded after the plugin -->
+        <script src="../_cdn/tablesorter/dist/js/jquery.tablesorter.widgets.js"></script>
     </head>
     <body class="dashboard_main">
         <div class="workcontrol_upload workcontrol_loadmodal">

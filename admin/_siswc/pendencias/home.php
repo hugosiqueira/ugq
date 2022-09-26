@@ -20,7 +20,7 @@ $S = filter_input(INPUT_GET, "s", FILTER_DEFAULT);
 $O = filter_input(INPUT_GET, "opt", FILTER_DEFAULT);
 $D = filter_input(INPUT_GET, "d", FILTER_DEFAULT);
 
-$WhereString = (!empty($S) ? " AND (description LIKE '%{$S}%' " : "");
+$WhereString = (!empty($S) ? " AND description LIKE '%{$S}%' " : "");
 $WhereOpt = ((!empty($O)) ? " AND fgk_type_pendency = $O" : "");
 $WhereDepartment = ((!empty($D)) ? " AND fgk_department = {$D}" : "");
 
@@ -92,25 +92,25 @@ endif;
     <article class='project_dashboard box box100'>
         <table class='styled-table'>
             <thead>
-                <th width='19%'>Setor</th>
+                <th width='17%'>Setor</th>
                 <th width='10%'>Categoria</th>
 				<th width='6%'>Entrega</th>
 				<th width='6%'>Devolução</th>
-				<th width='10%'>Status</th>
-				<th width='14%'>Responsável</th>
-				<th width='30%'>Descrição</th>
-                <th width='1%'></th>
+				<th width='8%'>Status</th>
+				<th width='17%'>Responsável</th>
+				<th width='31%'>Descrição</th>
             </thead>
             <tbody>
     <?php
     $getPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
     $Page = ($getPage ? $getPage : 1);
     $Pager = new Pager("dashboard.php?wc=pendencias/home&opt={$O}&s={$S}&d={$D}&page=", "<<", ">>", 5);
-    $Pager->ExePager($Page, 50);
+    $Pager->ExePager($Page, 150);
     $Read->FullRead("SELECT *, ". DB_PENDENCY.".id as pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
+    //echo "SELECT *, ". DB_PENDENCY.".id as pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset";
     if (!$Read->getResult()):
         $Pager->ReturnPage();
-        echo Erro("<span class='al_center icon-notification'>Ainda não existem pendências cadastradas, {$Admin['user_name']}. Comece agora mesmo cadastrando uma nova pendência!</span>", E_USER_NOTICE);
+        echo Erro("<span class='al_center icon-notification'>Ainda não existem pendências cadastradas com esses parâmetros, {$Admin['user_name']}. Comece agora mesmo cadastrando uma nova pendência!</span>", E_USER_NOTICE);
     else:
         foreach ($Read->getResult() as $Pendency):
             extract($Pendency);
@@ -128,16 +128,15 @@ endif;
                 $colaboradores=getNameUser($responsible);   
             endif;
             echo "
-                    
+           
                     <tr>
-                    <td>{$department}</td>
-                    <td>{$type_pendency}</td>
-					<td>{$date_delivery}</td>
-					<td>{$date_limit}</td>
-					<td>{$status}</td>
-					<td>{$colaboradores}</td>
-					<td>{$description}</td>
-                    <td><a href='dashboard.php?wc=projetos/create&id={$pendency_id}' class=' btn btn_blue'> Editar</a></td>
+                    <td> <a href='dashboard.php?wc=projetos/create&id={$pendency_id}'>{$department}</a></td>
+                    <td> {$type_pendency}</td>
+					<td> {$date_delivery}</td>
+					<td> {$date_limit}</td>
+					<td> {$status}</td>
+					<td> {$colaboradores}</td>
+					<td> <a href='dashboard.php?wc=projetos/create&id={$pendency_id}'>{$description}</a></td>
                     </tr>
                     
                 ";
@@ -153,3 +152,14 @@ endif;
         echo $Pager->getPaginator();
     ?>
 </div>
+<script>
+$(function() {
+  $(".styled-table").tablesorter({
+    dateFormat : "ddmmyyyy", // set the default date format
+    headers: {
+      2: { sorter: "shortDate" },
+      3: { sorter: "shortDate" } 
+    }
+  });
+});
+</script>

@@ -3962,7 +3962,7 @@ div.mce-fullscreen{z-index: 97;}
 
 .styled-table {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 15px 0;
     font-size: 0.8em;
     font-family: sans-serif;
     width: 99%;
@@ -3975,7 +3975,7 @@ div.mce-fullscreen{z-index: 97;}
 }
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+    padding: 6px 8px;
 }
 .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
