@@ -276,17 +276,7 @@ endif;
                     endif;
                 endif;
 
-                if (!file_exists("../license.txt")):
-                    echo "<div>";
-                    echo Erro("<span class='al_center'><b class='icon-warning'>ATENÇÃO:</b> O license.txt não está presente na raiz do projeto. Utilizar o Work Control® sem esse arquivo caracteriza cópia não licenciada.", E_USER_ERROR);
-                    echo "</div>";
-                endif;
 
-                if (ADMIN_MAINTENANCE):
-                    echo "<div>";
-                    echo Erro("<span class='al_center'><b class='icon-warning'>IMPORTANTE:</b> O modo de manutenção está ativo. Somente usuários administradores podem ver o site assim!</span>", E_USER_ERROR);
-                    echo "</div>";
-                endif;
 
                 //DB TEST
                 $Read->FullRead("SELECT VERSION() as mysql_version");
