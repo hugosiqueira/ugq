@@ -37,6 +37,7 @@ endif;
 
 <header class="dashboard_header">
 <a class='btn btn_blue icon-plus' href='dashboard.php?wc=pendencias/create' style="float:right;" title='Nova Pendência!'>Nova Pendência</a>
+<a class='btn btn_red icon-pdf' href='<?="dashboard.php?wc=pendencias/pdf&opt={$O}&s={$S}&d={$D}";?>' style="float:right; margin-right:20px" title='Gerar PDF'>Gerar PDF</a>
 
     <div class="dashboard_header_title">
 
