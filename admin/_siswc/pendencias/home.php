@@ -37,7 +37,8 @@ endif;
 
 <header class="dashboard_header">
 <a class='btn btn_blue icon-plus' href='dashboard.php?wc=pendencias/create' style="float:right;" title='Nova Pendência!'>Nova Pendência</a>
-<a class='btn btn_red icon-pdf' href='<?="dashboard.php?wc=pendencias/pdf&opt={$O}&s={$S}&d={$D}";?>' style="float:right; margin-right:20px" title='Gerar PDF'>Gerar PDF</a>
+<a class='btn btn_red icon-file-pdf' target='_blank' href='<?="dashboard.php?wc=pendencias/pdf&or=l&opt={$O}&s={$S}&d={$D}";?>' style="float:right; margin-right:20px" title='Gerar PDF'>PDF Completo</a>
+<a class='btn btn_red icon-file-pdf' target='_blank' href='<?="dashboard.php?wc=pendencias/pdf&or=p&opt={$O}&s={$S}&d={$D}";?>' style="float:right; margin-right:20px" title='Gerar PDF'>PDF Área Técnica</a>
 
     <div class="dashboard_header_title">
 
@@ -89,7 +90,7 @@ endif;
     </div>
 </header>
 
-<div class="dashboard_content">
+<div class='dashboard_content'>
     <article class='project_dashboard box box100'>
         <table class='styled-table'>
             <thead>
