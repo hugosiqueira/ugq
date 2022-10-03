@@ -110,7 +110,7 @@ endif;
                 </div>
                 <ul class="dashboard_nav_menu">
                     <li class="dashboard_nav_menu_li <?= $getViewInput == 'home' ? 'dashboard_nav_menu_active' : ''; ?>"><a class="icon-home" title="Dashboard" href="dashboard.php?wc=home">Dashboard</a></li>
-                    <li class="dashboard_nav_menu_li"><a target="_blank" class="icon-calendar" title="Ver Site" href="dashboard.php?wc=pendencias/home">Pendências</a></li>
+                    <li class="dashboard_nav_menu_li"><a  class="icon-calendar" title="Pendências" href="dashboard.php?wc=pendencias/home">Pendências</a></li>
                     <?php
                     if (APP_USERS && $_SESSION['userLogin']['user_level'] >= LEVEL_WC_USERS):
                         ?>

@@ -34,6 +34,11 @@ if ($Search && (isset($Search['s']) || isset($Search['opt']) || isset($Search['d
 endif;
 
 ?>
+<style>
+.icon-checkmark:before, .icon-pencil:before {
+    margin-right: 0;
+}
+</style>
 
 <header class="dashboard_header">
 <a class='btn btn_blue icon-plus' href='dashboard.php?wc=pendencias/create' style="float:right;" title='Nova Pendência!'>Nova Pendência</a>
@@ -73,12 +78,12 @@ endif;
 			<select name="opt" style="width: 15%; margin-right: 3px; padding: 5px">
                 <option value="">Todas categorias</option>
 				<?php
-				$Read->FullRead("SELECT id, type_pendency FROM ugq_type_pendency  ORDER BY type_pendency ASC;");
+				$Read->FullRead("SELECT pendency_id, type_pendency FROM ugq_type_pendency  ORDER BY type_pendency ASC;");
 				if ($Read->getResult()):
 				
 					foreach ($Read->getResult() as $ugq_type_pendency):
-					($O === $ugq_type_pendency['id'] ? $select="selected=selected": $select=""); 
-						echo "<option value={$ugq_type_pendency['id']} {$select} >{$ugq_type_pendency['type_pendency']}</option>";
+					($O === $ugq_type_pendency['pendency_id'] ? $select="selected=selected": $select=""); 
+						echo "<option value={$ugq_type_pendency['pendency_id']} {$select} >{$ugq_type_pendency['type_pendency']}</option>";
 					endforeach;
 				endif;
 				?>
@@ -95,12 +100,13 @@ endif;
         <table class='styled-table'>
             <thead>
                 <th width='17%'>Setor</th>
-                <th width='10%'>Categoria</th>
+                <th width='11%'>Categoria</th>
 				<th width='6%'>Entrega</th>
 				<th width='6%'>Devolução</th>
 				<th width='8%'>Status</th>
 				<th width='17%'>Responsável</th>
-				<th width='31%'>Descrição</th>
+				<th width='26%'>Descrição</th>
+                <th width='9%'>Ações</th>
             </thead>
             <tbody>
     <?php
@@ -108,8 +114,8 @@ endif;
     $Page = ($getPage ? $getPage : 1);
     $Pager = new Pager("dashboard.php?wc=pendencias/home&opt={$O}&s={$S}&d={$D}&page=", "<<", ">>", 5);
     $Pager->ExePager($Page, 150);
-    $Read->FullRead("SELECT *, ". DB_PENDENCY.".id as pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
-    //echo "SELECT *, ". DB_PENDENCY.".id as pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset";
+    $Read->FullRead("SELECT *, ". DB_PENDENCY.".pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
+
     if (!$Read->getResult()):
         $Pager->ReturnPage();
         echo Erro("<span class='al_center icon-notification'>Ainda não existem pendências cadastradas com esses parâmetros, {$Admin['user_name']}. Comece agora mesmo cadastrando uma nova pendência!</span>", E_USER_NOTICE);
@@ -132,13 +138,14 @@ endif;
             echo "
            
                     <tr>
-                    <td> <a href='dashboard.php?wc=projetos/create&id={$pendency_id}'>{$department}</a></td>
+                    <td> {$department}</td>
                     <td> {$type_pendency}</td>
 					<td> {$date_delivery}</td>
 					<td> {$date_limit}</td>
 					<td> {$status}</td>
 					<td> {$colaboradores}</td>
-					<td> <a href='dashboard.php?wc=projetos/create&id={$pendency_id}'>{$description}</a></td>
+					<td>{$description}</td>
+                    <td> <a href='dashboard.php?wc=pendencias/create&id={$pendency_id}' class='btn btn_red'><span class='icon-pencil'></span></a><a href='dashboard.php?wc=pendencias/create&id={$pendency_id}' class='btn btn_green' style='margin-left:5px'><span class='icon-checkmark'></span></a></td>
                     </tr>
                     
                 ";
