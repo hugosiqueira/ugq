@@ -34,6 +34,8 @@ if ($Search && (isset($Search['s']) || isset($Search['opt']) || isset($Search['d
 endif;
 
 ?>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <style>
 .icon-checkmark:before, .icon-pencil:before {
     margin-right: 0;
@@ -62,8 +64,8 @@ endif;
     <form name="searchPendency" action="" method="post" enctype="multipart/form-data" class="ajax_off">
 
             <input type="search" value="<?= $S; ?>" name="s" placeholder="Pesquisar:" style="width: 15%; margin-right: 3px;" />
-			<select name="d" style="width: 15%; margin-right: 3px; padding: 5px">
-                <option value="">Todos Setores</option>
+			<select name="d[]" class="multiple" style="width: 40%; margin-right: 3px; padding: 5px" multiple="multiple">
+                <option >Todos Setores</option>
 				<?php
 				$Read->FullRead("SELECT id, department FROM ugq_department WHERE is_active = :a ORDER BY department ASC;", "a=1");
 				if ($Read->getResult()):
@@ -78,7 +80,7 @@ endif;
 			<select name="opt" style="width: 15%; margin-right: 3px; padding: 5px">
                 <option value="">Todas categorias</option>
 				<?php
-				$Read->FullRead("SELECT pendency_id, type_pendency FROM ugq_type_pendency  ORDER BY type_pendency ASC;");
+				$Read->FullRead("SELECT id, type_pendency FROM ugq_type_pendency  ORDER BY type_pendency ASC;");
 				if ($Read->getResult()):
 				
 					foreach ($Read->getResult() as $ugq_type_pendency):
@@ -104,8 +106,8 @@ endif;
 				<th width='6%'>Entrega</th>
 				<th width='6%'>Devolução</th>
 				<th width='8%'>Status</th>
-				<th width='17%'>Responsável</th>
-				<th width='26%'>Descrição</th>
+				<th width='13%'>Responsável</th>
+				<th width='30%'>Descrição</th>
                 <th width='9%'>Ações</th>
             </thead>
             <tbody>
@@ -122,18 +124,19 @@ endif;
     else:
         foreach ($Read->getResult() as $Pendency):
             extract($Pendency);
-			($status == 0 && ($date_limit < date('Y-m-d')) ? $status= "Atrasado" : $status= "No prazo");
+			($status == 0 && ($date_limit < date('Y-m-d')) ? $status= "Atrasado" : ($status == 1 ? $status= "Concluído" : $status="No prazo"));
 			$date_delivery = date('d/m/Y', strtotime($date_delivery));
 			$date_limit = date('d/m/Y', strtotime($date_limit));
-            if(strripos($responsible, ",")):
-                
+            if(strripos($responsible, ",")): 
                 $colaboradores = "";
                 $user = explode(",", $responsible); 
                 foreach ($user as $users):
-                    $colaboradores=$colaboradores."".getNameUser(intval($users))." / ";
+   
+                    $separador = (end($user) == $users ? "" :", ");
+                    $colaboradores=$colaboradores."".getfirstNameUser(intval($users))."".$separador;
                 endforeach;
             else:
-                $colaboradores=getNameUser($responsible);   
+                $colaboradores=getfirstNameUser($responsible);   
             endif;
             echo "
            
@@ -163,6 +166,10 @@ endif;
 </div>
 <script>
 $(function() {
+  $('.multiple').select2({
+  placeholder: "Selecione um setor",
+  allowClear: true
+  });
   $(".styled-table").tablesorter({
     dateFormat : "ddmmyyyy", // set the default date format
     headers: {

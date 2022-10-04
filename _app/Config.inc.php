@@ -232,3 +232,20 @@ function getnameUser($user = null)
 		return "Não Informado";
 	endif;
 }
+
+
+function getfirstnameUser($user = null)
+{
+	// AUTO INSTANCE OBJECT READ
+	if (empty($Read)):
+		$Read = new Read;
+	endif;
+    $Read->FullRead("SELECT SUBSTRING_INDEX(`user_name`, ' ', 1) AS first_name FROM ws_users WHERE user_id = :d", "d={$user}");
+	if ($Read->getResult()):
+		foreach ($Read->getResult() as $ugq_user):
+			return $ugq_user['first_name'];
+		endforeach;
+	else:
+		return "Não Informado";
+	endif;
+}
