@@ -32,8 +32,7 @@ else:
     exit;
 endif;
 ?>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <header class="dashboard_header">
     <div class="dashboard_header_title">
         <h1 class="icon-calendar"><?= $type_pendency ? $type_pendency : 'Nova Pendência'; ?></h1>

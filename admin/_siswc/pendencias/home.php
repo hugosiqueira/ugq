@@ -22,14 +22,33 @@ $D = filter_input(INPUT_GET, "d", FILTER_DEFAULT);
 
 $WhereString = (!empty($S) ? " AND description LIKE '%{$S}%' " : "");
 $WhereOpt = ((!empty($O)) ? " AND fgk_type_pendency = $O" : "");
-$WhereDepartment = ((!empty($D)) ? " AND fgk_department = {$D}" : "");
+$WhereDepartment = '';
+if(isset($D)):
+    if(mb_strpos($D, ',')!== false):
+       $array = explode(',', $D);
+       $i=0;
+       $len = count($array);
+       foreach($array as $dept):
+        if($i==0):
+            $WhereDepartment .=  " AND fgk_department = {$dept}" ;
+        else:
+            $WhereDepartment .=  " OR fgk_department = {$dept}" ;
+        endif;
+        $i++;
+       endforeach;
+    else:
+        $WhereDepartment .=  " AND fgk_department = {$D}" ;
+    endif;
+endif;
+
+(isset($_POST['d']) ? $R = implode(",", (array) $_POST['d']) : "");
 
 $Search = filter_input_array(INPUT_POST);
 if ($Search && (isset($Search['s']) || isset($Search['opt']) || isset($Search['d']) )):
     $S = urlencode($Search['s']);
     $O = urlencode($Search['opt']);
 	$D = urlencode($Search['d']);
-    header("Location: dashboard.php?wc=pendencias/home&opt={$O}&s={$S}&d={$D}"); 
+    header("Location: dashboard.php?wc=pendencias/home&opt={$O}&s={$S}&d={$R}"); 
     exit;
 endif;
 
@@ -65,13 +84,12 @@ endif;
 
             <input type="search" value="<?= $S; ?>" name="s" placeholder="Pesquisar:" style="width: 15%; margin-right: 3px;" />
 			<select name="d[]" class="multiple" style="width: 40%; margin-right: 3px; padding: 5px" multiple="multiple">
-                <option >Todos Setores</option>
 				<?php
 				$Read->FullRead("SELECT id, department FROM ugq_department WHERE is_active = :a ORDER BY department ASC;", "a=1");
 				if ($Read->getResult()):
 					foreach ($Read->getResult() as $ugq_department):
-					($D === $ugq_department['id'] ? $select="selected=selected": $select=""); 
-						echo "<option value={$ugq_department['id']} {$select} >{$ugq_department['department']}</option>";
+					    ($D === $ugq_department['id'] ? $select="selected=selected": $select=""); 
+						echo "<option value={$ugq_department['id']} {$select}>{$ugq_department['department']}</option>";
 					endforeach;
 				endif;
 				?>
@@ -84,8 +102,8 @@ endif;
 				if ($Read->getResult()):
 				
 					foreach ($Read->getResult() as $ugq_type_pendency):
-					($O === $ugq_type_pendency['pendency_id'] ? $select="selected=selected": $select=""); 
-						echo "<option value={$ugq_type_pendency['pendency_id']} {$select} >{$ugq_type_pendency['type_pendency']}</option>";
+					($O === $ugq_type_pendency['id'] ? $select="selected=selected": $select=""); 
+						echo "<option value={$ugq_type_pendency['id']} {$select}>{$ugq_type_pendency['type_pendency']}</option>";
 					endforeach;
 				endif;
 				?>
@@ -178,4 +196,9 @@ $(function() {
     }
   });
 });
+<?php
+if (isset($D)):
+    echo "$('.multiple').val([{$D}]);";
+endif;
+?>
 </script>
