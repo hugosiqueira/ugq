@@ -134,7 +134,7 @@ endif;
     $Page = ($getPage ? $getPage : 1);
     $Pager = new Pager("dashboard.php?wc=pendencias/home&opt={$O}&s={$S}&d={$D}&page=", "<<", ">>", 5);
     $Pager->ExePager($Page, 150);
-    $Read->FullRead("SELECT *, ". DB_PENDENCY.".pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
+    $Read->FullRead("SELECT *, ". DB_PENDENCY.".id as pendency_id FROM ". DB_PENDENCY." LEFT JOIN ". DB_TYPE_PENDENCY ." ON ".DB_TYPE_PENDENCY.".id = fgk_type_pendency LEFT JOIN ". DB_DEPARTMENT ." ON ".DB_DEPARTMENT.".id = fgk_department WHERE 1=1  $WhereString $WhereOpt $WhereDepartment ORDER BY date_limit ASC LIMIT :limit OFFSET :offset", "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
 
     if (!$Read->getResult()):
         $Pager->ReturnPage();
@@ -142,7 +142,7 @@ endif;
     else:
         foreach ($Read->getResult() as $Pendency):
             extract($Pendency);
-			($status == 0 && ($date_limit < date('Y-m-d')) ? $status= "Atrasado" : ($status == 1 ? $status= "Concluído" : $status="No prazo"));
+			($status == 0 && ($date_limit < date('Y-m-d')) ? $status = "Atrasado" : ($status == 1 ? $status= "Concluído" : $status="No prazo"));
 			$date_delivery = date('d/m/Y', strtotime($date_delivery));
 			$date_limit = date('d/m/Y', strtotime($date_limit));
             if(strripos($responsible, ",")): 
