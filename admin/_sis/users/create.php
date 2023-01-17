@@ -74,14 +74,15 @@ endif;
                     <input type="hidden" name="callback_action" value="manager"/>
                     <input type="hidden" name="user_id" value="<?= $UserId; ?>"/>
                     <label class="label">
-                        <span class="legend">Primeiro nome:</span>
-                        <input value="<?= $user_name; ?>" type="text" name="user_name" placeholder="Primeiro Nome:" required />
+                        <span class="legend">Nome Completo:</span>
+                        <input value="<?= $user_name; ?>" type="text" name="user_name" placeholder="Nome Completo:" required />
+                    </label>
+                    <label class="label">
+                        <span class="legend">Foto (<?= AVATAR_W; ?>x<?= AVATAR_H; ?>px, JPG ou PNG):</span>
+                        <input type="file" name="user_thumb" class="wc_loadimage" />
                     </label>
 					<div class="label_50">
-						<label class="label">
-							<span class="legend">Foto (<?= AVATAR_W; ?>x<?= AVATAR_H; ?>px, JPG ou PNG):</span>
-							<input type="file" name="user_thumb" class="wc_loadimage" />
-						</label>
+						
 						<label class="label">
 							<span class="legend">Data de Nascimento:</span>
 							<input value="<?= $user_datebirth; ?>" type="date" name="user_datebirth"  placeholder="Data de nascimento:" />
