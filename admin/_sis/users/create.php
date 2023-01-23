@@ -218,6 +218,10 @@ endif;
 							?>
 							</select>
                         </label>
+                        <label class="label">
+                            <span class="legend">Último Periódico:</span>
+                            <input value="<?= $user_periodico; ?>" type="date" name="user_periodico" " placeholder="Data do último exame periódico:" />
+                        </label>
                     </div>
 					<div class="label_50">
                         <label class="label">
@@ -250,16 +254,6 @@ endif;
 							</select>
                         </label>
                     </div>
-                    
-					<div class="label_50">
-
-
-                        <label class="label">
-                            <span class="legend">Último Periódico:</span>
-                            <input value="<?= $user_periodico; ?>" type="date" name="user_periodico" " placeholder="Data do último exame periódico:" />
-                        </label>
-                    </div>
-					
 
                     <div class="label_50">
                         <label class="label">
