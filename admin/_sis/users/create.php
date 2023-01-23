@@ -81,14 +81,26 @@ endif;
                         <span class="legend">Foto (<?= AVATAR_W; ?>x<?= AVATAR_H; ?>px, JPG ou PNG):</span>
                         <input type="file" name="user_thumb" class="wc_loadimage" />
                     </label>
+                    <div class="clear"></div>
+                    <h3 class="students_gerent_subtitle icon-user-tie m_botton">Dados Institucionais:</h3>
 					<div class="label_50">
+                        <label class="label">
+                            <span class="legend">Registro Funcional - Unifesp/HSP:</span>
+                            <input value="<?= $user_rf; ?>" type="text" name="user_rf"  placeholder="RF:" />
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Siape:</span>
+                            <input value="<?= $user_siape; ?>" type="text" name="user_siape" " placeholder="Siape:" />
+                        </label>
+                    </div>
+					<div class="label_33">
 						
 						<label class="label">
 							<span class="legend">Data de Nascimento:</span>
 							<input value="<?= $user_datebirth; ?>" type="date" name="user_datebirth"  placeholder="Data de nascimento:" />
 						</label>
-					</div>
-					<div class="label_50">
+					
                         <label class="label">
                             <span class="legend">CPF:</span>
                             <input value="<?= $user_document; ?>" type="text" name="user_document" class="formCpf" placeholder="CPF:" />
