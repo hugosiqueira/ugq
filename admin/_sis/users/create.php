@@ -94,6 +94,8 @@ endif;
                             <input value="<?= $user_siape; ?>" type="text" name="user_siape" " placeholder="Siape:" />
                         </label>
                     </div>
+                    <div class="clear"></div>
+                    <h3 class="students_gerent_subtitle icon-user-tie m_botton">Dados Pessoais:</h3>
 					<div class="label_33">
 						
 						<label class="label">
