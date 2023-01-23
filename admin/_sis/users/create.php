@@ -65,7 +65,7 @@ endif;
         <article class="wc_tab_target wc_active" id="profile">
 
             <div class="panel_header default">
-                <h2 class="icon-user-plus">DADOS PESSOAIS DE <?= strtoupper($user_name); ?></h2>
+                <h2 class="icon-user-plus">COLABORADOR <?= strtoupper($user_name); ?></h2>
             </div>
 
             <div class="panel">
@@ -100,16 +100,17 @@ endif;
 							<span class="legend">Data de Nascimento:</span>
 							<input value="<?= $user_datebirth; ?>" type="date" name="user_datebirth"  placeholder="Data de nascimento:" />
 						</label>
-					
-                        <label class="label">
-                            <span class="legend">CPF:</span>
-                            <input value="<?= $user_document; ?>" type="text" name="user_document" class="formCpf" placeholder="CPF:" />
-                        </label>
 
                         <label class="label">
                             <span class="legend">RG:</span>
                             <input value="<?= $user_rg; ?>" type="text" name="user_rg"  placeholder="RG:" />
                         </label>
+					
+                        <label class="label">
+                            <span class="legend">CPF:</span>
+                            <input value="<?= $user_document; ?>" type="text" name="user_document" class="formCpf" placeholder="CPF:" />
+                        </label>
+                        
                     </div>
 					<div class="label_50">
 						
@@ -168,19 +169,15 @@ endif;
 
                    
 					<div class="clear"></div>
-                    <h3 class="students_gerent_subtitle icon-user-tie m_botton">Dados Institucionais:</h3>
+                    <h3 class="students_gerent_subtitle icon-user-tie m_botton">DADOS PROFISSIONAIS:</h3>
+					
 					<div class="label_50">
-                        <label class="label">
-                            <span class="legend">Registro Funcional - Unifesp/HSP:</span>
-                            <input value="<?= $user_rf; ?>" type="text" name="user_rf"  placeholder="RF:" />
+                         <label class="label">
+                            <span class="legend">Data de Admisssão:</span>
+                            <input value="<?= $user_admission; ?>" type="date" name="user_admission"  placeholder="Data de admissão:" />
                         </label>
 
-                        <label class="label">
-                            <span class="legend">Siape:</span>
-                            <input value="<?= $user_siape; ?>" type="text" name="user_siape" " placeholder="Siape:" />
-                        </label>
-                    </div>
-					<div class="label_50">
+                        
                         <label class="label">
                             <span class="legend">Instituição:</span>
 							<select name="user_employer" required>
@@ -188,6 +185,22 @@ endif;
 								<option value="UNIFESP" <?= ($user_employer == "UNIFESP" ? 'selected="selected"' : ''); ?>>UNIFESP</option>
 								<option value="SPDM" <?= ($user_employer == "SPDM" ? 'selected="selected"' : ''); ?>>SPDM</option>
 							</select>
+                        </label>
+                    </div>
+                    <div class="label_50">
+                        <label class="label">
+                            <span class="legend">Carga Horária:</span>
+							<select name="user_hour">
+								<option>Selecione a carga horária</option>
+								<option value=30 <?=($user_hour == 30 ? "selected=selected" : "");?>>30h</option>
+								<option value=40 <?=($user_hour == 40 ? "selected=selected" : "");?>>40h</option>
+								<option value=12 <?=($user_hour == 12 ? "selected=selected" : "");?>>12x36h</option>
+							</select>
+                        </label>
+
+                        <label class="label">
+                            <span class="legend">Horário de Trabalho:</span>
+                            <input value="<?= $user_time; ?>" type="text" class="formHour" name="user_time" " placeholder="Horário de Trabalho:" />
                         </label>
 
                         <label class="label">
@@ -239,32 +252,15 @@ endif;
                     </div>
                     
 					<div class="label_50">
-                        <label class="label">
-                            <span class="legend">Data de Admisssão:</span>
-                            <input value="<?= $user_admission; ?>" type="date" name="user_admission"  placeholder="Data de admissão:" />
-                        </label>
+
 
                         <label class="label">
                             <span class="legend">Último Periódico:</span>
                             <input value="<?= $user_periodico; ?>" type="date" name="user_periodico" " placeholder="Data do último exame periódico:" />
                         </label>
                     </div>
-					<div class="label_50">
-                        <label class="label">
-                            <span class="legend">Carga Horária:</span>
-							<select name="user_hour">
-								<option>Selecione a carga horária</option>
-								<option value=30 <?=($user_hour == 30 ? "selected=selected" : "");?>>30h</option>
-								<option value=40 <?=($user_hour == 40 ? "selected=selected" : "");?>>40h</option>
-								<option value=12 <?=($user_hour == 12 ? "selected=selected" : "");?>>12x36h</option>
-							</select>
-                        </label>
+					
 
-                        <label class="label">
-                            <span class="legend">Horário de Trabalho:</span>
-                            <input value="<?= $user_time; ?>" type="text" class="formHour" name="user_time" " placeholder="Horário de Trabalho:" />
-                        </label>
-                    </div>
                     <div class="label_50">
                         <label class="label">
                             <span class="legend">É supervisor do setor?</span>
@@ -295,7 +291,7 @@ endif;
 					</div>
 					<div class="label_50">
 						<label class="label">
-							<span class="legend">Situaço:</span>
+							<span class="legend">Situação:</span>
 							<select name="user_status" required>
 								<option selected disabled value="">Selecione a situação do colaborador:</option>
 							<?php
