@@ -1,2 +1,2 @@
-# Sistema da Gestão da Qualidade do Hospital São Paulo 1.0
+# Sistema da Gestão da Qualidade HSP 1.0
 
