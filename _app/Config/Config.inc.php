@@ -5,9 +5,9 @@ if (!$WorkControlDefineConf):
      * URL DO SISTEMA
      */
     if($_SERVER['HTTP_HOST'] == 'localhost'):
-        define('BASE', 'https://localhost/workcontrol'); //Url raiz do site no localhost
+        define('BASE', 'https://localhost/'); //Url raiz do site no localhost
     else:
-        define('BASE', 'https://ugq.agenciabee.com'); //Url raiz do site no servidor
+        define('BASE', '#'); //Url raiz do site no servidor
     endif;
     define('THEME', 'wc_default'); //template do site
 endif;
